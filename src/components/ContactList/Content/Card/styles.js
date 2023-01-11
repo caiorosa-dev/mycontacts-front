@@ -9,10 +9,8 @@ export const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow};
 `;
 
-export const Name = styled.p`
+export const Name = styled.strong`
   font-size: 16px;
-  color: ${({ theme }) => theme.colors.gray.dark};
-  font-weight: bold;
 `;
 
 export const Tag = styled.span`
@@ -25,7 +23,7 @@ export const Tag = styled.span`
   text-transform: uppercase;
 `;
 
-export const Information = styled.span`
+export const Information = styled.small`
   display: block;
   font-size: 14px;
   color: ${({ theme }) => theme.colors.gray.main};

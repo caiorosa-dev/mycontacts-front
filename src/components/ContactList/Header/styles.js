@@ -8,7 +8,6 @@ export const Container = styled.div`
 
   strong {
     font-size: 24px;
-    color: ${({ theme }) => theme.colors.gray.dark};
   }
 
   a {
