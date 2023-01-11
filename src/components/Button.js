@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export default styled.button`
-  padding: 10px 16px;
+  padding: 16px 16px;
   font-size: 16px;
   font-weight: bold;
 
