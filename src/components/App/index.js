@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from '../../assets/styles/global';
@@ -7,6 +8,12 @@ import Header from '../Header';
 import { Container } from './styles';
 
 function App() {
+  useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
