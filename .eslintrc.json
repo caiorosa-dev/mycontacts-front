@@ -29,6 +29,8 @@
     "camelcase": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "no-console": "off"
+    "no-console": "off",
+    "class-methods-use-this": "off",
+    "no-unused-vars": "warn"
   }
 }

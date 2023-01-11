@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { SearchInputContainer } from './styles';
 import ContactList from '../../components/ContactList';
-import HttpClient from '../../utils/HttpClient';
-import delay from '../../utils/delay';
 import Loader from '../../components/Loader';
+import ContactsService from '../../services/ContactsService';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -20,9 +19,7 @@ export default function Home() {
       setLoading(true);
 
       try {
-        const { data } = await HttpClient.get(`/contacts?orderBy=${orderBy}`);
-
-        await delay(500);
+        const data = ContactsService.listContacts(orderBy);
 
         setContacts(data);
       } catch (err) {
