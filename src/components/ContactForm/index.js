@@ -19,7 +19,7 @@ export default function ContactForm({ buttonText }) {
     addError, removeError, getErrorMessageByFieldName, isValidToSubmit,
   } = useErrors();
 
-  const isFormValid = (isValidToSubmit() && name && email);
+  const isFormValid = (isValidToSubmit() && name);
 
   function handleNameChange(value) {
     setName(value);
@@ -33,11 +33,6 @@ export default function ContactForm({ buttonText }) {
 
   function handleEmailChange(value) {
     setEmail(value);
-
-    if (!value) {
-      addError({ field: 'email', message: 'O e-mail é obrigatório.' });
-      return;
-    }
 
     if (!isEmailValid(value)) {
       addError({ field: 'email', message: 'O e-mail está inválido.' });
