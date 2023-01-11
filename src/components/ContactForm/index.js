@@ -7,6 +7,7 @@ import Select from '../Select';
 import FormGroup from './FormGroup';
 import { Form } from './styles';
 import isEmailValid from '../../utils/isEmailValid';
+import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 
 export default function ContactForm({ buttonText }) {
@@ -14,7 +15,11 @@ export default function ContactForm({ buttonText }) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
-  const { addError, removeError, getErrorMessageByFieldName } = useErrors();
+  const {
+    addError, removeError, getErrorMessageByFieldName, isValidToSubmit,
+  } = useErrors();
+
+  const isFormValid = (isValidToSubmit() && name && email);
 
   function handleNameChange(value) {
     setName(value);
@@ -42,22 +47,26 @@ export default function ContactForm({ buttonText }) {
     removeError('email');
   }
 
+  function handlePhoneChange(value) {
+    setPhone(formatPhone(value));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input placeholder="Nome *" name="name" error={getErrorMessageByFieldName('name')} value={name} onChange={(event) => handleNameChange(event.target.value)} />
       </FormGroup>
 
       <FormGroup error={getErrorMessageByFieldName('email')}>
-        <Input placeholder="E-Mail *" name="email" error={getErrorMessageByFieldName('email')} value={email} onChange={(event) => handleEmailChange(event.target.value)} />
+        <Input placeholder="E-Mail *" type="email" name="email" error={getErrorMessageByFieldName('email')} value={email} onChange={(event) => handleEmailChange(event.target.value)} />
       </FormGroup>
 
       <FormGroup>
-        <Input placeholder="Telefone" name="phone" value={phone} onChange={(event) => setPhone(event.target.value)} />
+        <Input placeholder="Telefone" name="phone" value={phone} onChange={(event) => handlePhoneChange(event.target.value)} maxLength="15" />
       </FormGroup>
 
       <Select name="category" value={category} onChange={(event) => setCategory(event.target.value)}>
@@ -66,7 +75,7 @@ export default function ContactForm({ buttonText }) {
         <option value="discord">Discord</option>
       </Select>
 
-      <Button type="submit">{buttonText}</Button>
+      <Button type="submit" disabled={!isFormValid}>{buttonText}</Button>
     </Form>
   );
 }

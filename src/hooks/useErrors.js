@@ -19,5 +19,11 @@ export default function useErrors() {
     return errors.find((error) => error.field === fieldName)?.message;
   }
 
-  return { removeError, addError, getErrorMessageByFieldName };
+  function isValidToSubmit() {
+    return errors.length === 0;
+  }
+
+  return {
+    removeError, addError, getErrorMessageByFieldName, isValidToSubmit,
+  };
 }
