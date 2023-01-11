@@ -6,10 +6,13 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Sora', sans-serif;
+    outline: 0;
+    border: none;
+    text-decoration: none;
   }
 
   body {
-    background: ${({ theme }) => theme.backgroundColor};
+    background: ${({ theme }) => theme.colors.background};
     font-size: 16px;
   }
 
