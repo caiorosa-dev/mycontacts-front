@@ -9,5 +9,6 @@ export const Container = styled.form`
 
   button {
     margin-top: 8px;
+    width: 100%;
   }
 `;
