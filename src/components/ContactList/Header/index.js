@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Container } from './styles';
 
 export default function ContactListHeader() {
@@ -5,7 +6,7 @@ export default function ContactListHeader() {
     <Container>
       <strong>3 contatos</strong>
 
-      <a href="/">Novo Contato</a>
+      <Link to="/new">Novo Contato</Link>
     </Container>
   );
 }
