@@ -1,21 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { SearchInputContainer } from './styles';
 import ContactList from '../../components/ContactList';
 import HttpClient from '../../utils/HttpClient';
+import delay from '../../utils/delay';
+import Loader from '../../components/Loader';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setLoading] = useState(true);
 
-  const filteredContacts = contacts.filter((contact) => (
+  const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ));
+  )), [contacts, searchTerm]);
 
   useEffect(() => {
-    HttpClient.get(`/contacts?orderBy=${orderBy}`).then(({ data }) => {
-      setContacts(data);
-    });
+    async function loadContacts() {
+      setLoading(true);
+
+      try {
+        const { data } = await HttpClient.get(`/contacts?orderBy=${orderBy}`);
+
+        await delay(500);
+
+        setContacts(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadContacts();
   }, [orderBy]);
 
   function onOrderToggle() {
@@ -24,6 +41,8 @@ export default function Home() {
 
   return (
     <section>
+      <Loader isLoading={isLoading} />
+
       <SearchInputContainer>
         <input type="text" placeholder="Digite um nome..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />
       </SearchInputContainer>

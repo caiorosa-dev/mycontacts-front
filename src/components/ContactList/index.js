@@ -6,11 +6,13 @@ import { Container, Division } from './styles';
 export default function ContactList({ contacts, onOrderToggle }) {
   return (
     <Container>
-      <ContactListHeader />
+      <ContactListHeader amount={contacts.length} />
 
       <Division />
 
+      { contacts.length > 0 && (
       <ContactListContent contacts={contacts} onOrderToggle={onOrderToggle} />
+      ) }
     </Container>
   );
 }
