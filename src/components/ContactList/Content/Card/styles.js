@@ -5,7 +5,9 @@ export const Container = styled.div`
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 16px;
+  min-height: 96px;
   box-shadow: ${({ theme }) => theme.shadow};
 `;
 
@@ -45,7 +47,7 @@ export const ButtonsContainer = styled.div`
   gap: 8px;
   align-items: center;
 
-  button {
+  button, a {
     background: none;
   }
 `;

@@ -24,3 +24,8 @@ export const CardContainer = styled.div`
   flex-direction: column;
   gap: 16px;
 `;
+
+export const ArrowImage = styled.img`
+  transform: ${({ arrowAngle }) => `rotate(${arrowAngle}deg)`};
+  transition: ${({ theme }) => theme.transition};
+`;
