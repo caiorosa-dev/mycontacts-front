@@ -18,7 +18,7 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.colors.primary.main};
     font-weight: bold;
     border-radius: 4px;
-    transition: all 0.2s ease-in;
+    transition: ${({ theme }) => theme.transition};
 
     &:hover {
       color: #fff;

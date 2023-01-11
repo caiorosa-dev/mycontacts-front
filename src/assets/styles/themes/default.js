@@ -22,4 +22,5 @@ export default {
     },
   },
   shadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.04)',
+  transition: 'all 0.2s ease-in',
 };

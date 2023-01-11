@@ -10,6 +10,11 @@ export const Button = styled.button`
   font-weight: bold;
   cursor: pointer;
   background: none;
+  transition: ${({ theme }) => theme.transition};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary.light};
+  }
 `;
 
 export const CardContainer = styled.div`
