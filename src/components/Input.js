@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export default styled.input`
   width: 100%;
@@ -9,6 +9,7 @@ export default styled.input`
   border-radius: 4px;
   transition: ${({ theme }) => theme.transition};
   box-shadow: ${({ theme }) => theme.shadow};
+  appearance: none;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.gray.main};
@@ -17,4 +18,9 @@ export default styled.input`
   :focus {
     border-color: ${({ theme }) => theme.colors.primary.main};
   }
+
+  ${({ theme, error }) => error && css`
+    border-color: ${theme.colors.danger.main} !important;
+    color: ${theme.colors.danger.main};
+  `}
 `;

@@ -9,6 +9,7 @@ export default styled.select`
   border-radius: 4px;
   transition: ${({ theme }) => theme.transition};
   box-shadow: ${({ theme }) => theme.shadow};
+  appearance: none;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.gray.main};
