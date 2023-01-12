@@ -1,4 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  useCallback, useEffect, useMemo, useState,
+} from 'react';
 import { Container, Division, SearchInputContainer } from './styles';
 import Loader from '../../components/Loader';
 import ContactsService from '../../services/ContactsService';
@@ -17,7 +19,7 @@ export default function Home() {
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [contacts, searchTerm]);
 
-  async function loadContacts() {
+  const loadContacts = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -36,11 +38,11 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [orderBy]);
 
   useEffect(() => {
     loadContacts();
-  }, [orderBy]);
+  }, [loadContacts]);
 
   function handleTryLoadContacts() {
     loadContacts();
