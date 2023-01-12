@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
+import toast from '../../utils/toast';
 
 export default function NewContact() {
   const history = useHistory();
@@ -16,9 +17,17 @@ export default function NewContact() {
     try {
       await ContactsService.create(contact);
 
-      history.push('/');
+      // history.push('/');
+
+      toast({
+        type: 'success',
+        text: 'Contato cadastrado com sucesso!',
+      });
     } catch (error) {
-      alert('Ocorreu um erro!');
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao realizar o cadastro!',
+      });
     }
   }
 
