@@ -25,7 +25,7 @@ export const Header = styled.header`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   justify-content: center;
   align-items: center;
 `;

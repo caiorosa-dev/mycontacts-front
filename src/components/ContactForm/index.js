@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '../Button';
 import Input from '../Input';
@@ -9,17 +9,40 @@ import { Form } from './styles';
 import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
+import CategoriesService from '../../services/CategoriesService';
 
 export default function ContactForm({ buttonText }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
+
+  const [categories, setCategories] = useState([]);
+  const [isLoadingCategories, setLoadingCategories] = useState(true);
+
   const {
     addError, removeError, getErrorMessageByFieldName, isValidToSubmit,
   } = useErrors();
 
   const isFormValid = (isValidToSubmit() && name);
+
+  useEffect(() => {
+    async function loadCategories() {
+      setLoadingCategories(true);
+
+      try {
+        const data = await CategoriesService.list();
+
+        setCategories(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoadingCategories(false);
+      }
+    }
+
+    loadCategories();
+  }, []);
 
   function handleNameChange(value) {
     setName(value);
@@ -64,11 +87,15 @@ export default function ContactForm({ buttonText }) {
         <Input placeholder="Telefone" name="phone" value={phone} onChange={(event) => handlePhoneChange(event.target.value)} maxLength="15" />
       </FormGroup>
 
-      <Select name="category" value={category} onChange={(event) => setCategory(event.target.value)}>
-        <option value="">Categoria</option>
-        <option value="instagram">Instagram</option>
-        <option value="discord">Discord</option>
-      </Select>
+      <FormGroup isLoading={isLoadingCategories}>
+        <Select name="category" value={category} disabled={isLoadingCategories} onChange={(event) => setCategory(event.target.value)}>
+          <option value="">Sem Categoria</option>
+          { categories
+            .map(
+              (object) => (<option key={object.id} value={object.id}>{object.name}</option>),
+            ) }
+        </Select>
+      </FormGroup>
 
       <Button type="submit" disabled={!isFormValid}>{buttonText}</Button>
     </Form>
