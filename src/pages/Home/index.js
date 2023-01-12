@@ -7,6 +7,8 @@ import ContactsService from '../../services/ContactsService';
 import ContactListHeader from '../../components/ContactList/Header';
 import ContactListContent from '../../components/ContactList/Content';
 import WithError from '../../components/ContactList/WithError';
+import EmptyContacts from '../../components/ContactList/EmptyContacts';
+import EmptySearch from '../../components/ContactList/EmptySearch';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -61,18 +63,19 @@ export default function Home() {
       </SearchInputContainer>
 
       <Container>
-        { !hasError && (
+        { (!hasError && contacts.length !== 0 && filteredContacts.length !== 0) && (
         <>
           <ContactListHeader amount={filteredContacts.length} />
 
           <Division />
 
-          { filteredContacts.length > 0 && (
           <ContactListContent contacts={filteredContacts} onOrderToggle={onOrderToggle} />
-          ) }
         </>
         ) }
         { hasError && <WithError handleTryLoadContacts={handleTryLoadContacts} /> }
+        { (!hasError && !isLoading && contacts.length === 0) && <EmptyContacts /> }
+        { (!hasError && !isLoading && filteredContacts.length === 0 && contacts.length !== 0)
+        && <EmptySearch searchTerm={searchTerm} /> }
       </Container>
     </section>
   );
