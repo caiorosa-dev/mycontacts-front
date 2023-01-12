@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import SmallSpinner from '../SmallSpinner';
+import SmallSpinner from '../../SmallSpinner';
 import { Container } from './styles';
 
 export default function FormGroup({ children, error, isLoading }) {

@@ -10,7 +10,6 @@ import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService';
-import SmallSpinner from './SmallSpinner';
 
 export default function ContactForm({ buttonText, onSubmit }) {
   const [name, setName] = useState('');
@@ -20,7 +19,7 @@ export default function ContactForm({ buttonText, onSubmit }) {
 
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setLoadingCategories] = useState(true);
-  const [isSubmitting, setSubmitting] = useState(true);
+  const [isSubmitting, setSubmitting] = useState(false);
 
   const {
     addError, removeError, getErrorMessageByFieldName, isValidToSubmit,
@@ -107,9 +106,8 @@ export default function ContactForm({ buttonText, onSubmit }) {
         </Select>
       </FormGroup>
 
-      <Button type="submit" disabled={!isFormValid || isSubmitting}>
-        {!isSubmitting && buttonText}
-        {isSubmitting && <SmallSpinner />}
+      <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>
+        { buttonText }
       </Button>
     </Form>
   );
