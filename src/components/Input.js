@@ -19,8 +19,14 @@ export default styled.input`
     border-color: ${({ theme }) => theme.colors.primary.main};
   }
 
+  :disabled {
+    background-color: ${({ theme }) => theme.colors.gray.light};
+    border-color: ${({ theme }) => theme.colors.gray.main};
+  }
+
   ${({ theme, error }) => error && css`
     border-color: ${theme.colors.danger.main} !important;
     color: ${theme.colors.danger.main};
+    opacity: 1;
   `}
 `;

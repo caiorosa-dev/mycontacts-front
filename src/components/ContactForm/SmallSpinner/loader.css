@@ -1,12 +1,12 @@
 /* Loader 5 */
-.form-loader {
+.loader {
   height: 16px;
   width: 16px;
-  -webkit-animation: form-loader-1 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
-  animation: form-loader-1 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  -webkit-animation: loader-1 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  animation: loader-1 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
 }
 
-@-webkit-keyframes form-loader-1 {
+@-webkit-keyframes loader-1 {
   0% {
     -webkit-transform: rotate(0deg);
   }
@@ -16,7 +16,7 @@
   }
 }
 
-@keyframes form-loader-1 {
+@keyframes loader-1 {
   0% {
     transform: rotate(0deg);
   }
@@ -26,7 +26,7 @@
   }
 }
 
-.form-loader::before {
+.loader::before {
   content: "";
   display: block;
   position: absolute;
@@ -39,11 +39,11 @@
   height: 4px;
   background: #5061FC;
   border-radius: 50%;
-  -webkit-animation: form-loader-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
-  animation: form-loader-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  -webkit-animation: loader-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  animation: loader-2 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
 }
 
-@-webkit-keyframes form-loader-2 {
+@-webkit-keyframes loader-2 {
   0% {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
@@ -57,7 +57,7 @@
   }
 }
 
-@keyframes form-loader-2 {
+@keyframes loader-2 {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
@@ -71,7 +71,7 @@
   }
 }
 
-.form-loader::after {
+.loader::after {
   content: "";
   display: block;
   position: absolute;
@@ -84,11 +84,11 @@
   height: 4px;
   background: #5061FC;
   border-radius: 50%;
-  -webkit-animation: form-loader-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
-  animation: form-loader-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  -webkit-animation: loader-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  animation: loader-3 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
 }
 
-@-webkit-keyframes form-loader-3 {
+@-webkit-keyframes loader-3 {
   0% {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
@@ -102,7 +102,7 @@
   }
 }
 
-@keyframes form-loader-3 {
+@keyframes loader-3 {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
@@ -116,7 +116,7 @@
   }
 }
 
-.form-loader span {
+.loader span {
   display: block;
   position: absolute;
   top: 0;
@@ -128,7 +128,7 @@
   width: 16px;
 }
 
-.form-loader span::before {
+.loader span::before {
   content: "";
   display: block;
   position: absolute;
@@ -141,11 +141,11 @@
   height: 4px;
   background: #5061FC;
   border-radius: 50%;
-  -webkit-animation: form-loader-4 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
-  animation: form-loader-4 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  -webkit-animation: loader-4 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  animation: loader-4 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
 }
 
-@-webkit-keyframes form-loader-4 {
+@-webkit-keyframes loader-4 {
   0% {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
@@ -159,7 +159,7 @@
   }
 }
 
-@keyframes form-loader-4 {
+@keyframes loader-4 {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
@@ -173,7 +173,7 @@
   }
 }
 
-.form-loader span::after {
+.loader span::after {
   content: "";
   display: block;
   position: absolute;
@@ -186,11 +186,11 @@
   height: 4px;
   background: #5061FC;
   border-radius: 50%;
-  -webkit-animation: form-loader-5 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
-  animation: form-loader-5 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  -webkit-animation: loader-5 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  animation: loader-5 1.5s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
 }
 
-@-webkit-keyframes form-loader-5 {
+@-webkit-keyframes loader-5 {
   0% {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
@@ -204,7 +204,7 @@
   }
 }
 
-@keyframes form-loader-5 {
+@keyframes loader-5 {
   0% {
     transform: translate3d(0, 0, 0) scale(1);
   }

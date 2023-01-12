@@ -22,5 +22,6 @@ export default styled.select`
   :disabled {
     background-color: ${({ theme }) => theme.colors.gray.light};
     border-color: ${({ theme }) => theme.colors.gray.main};
+    opacity: 1;
   }
 `;

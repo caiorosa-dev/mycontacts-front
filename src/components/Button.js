@@ -4,6 +4,11 @@ export default styled.button`
   padding: 16px 16px;
   font-size: 16px;
   font-weight: bold;
+  min-height: 53px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   background: ${({ theme }) => theme.colors.primary.main};
   color: #fff;
