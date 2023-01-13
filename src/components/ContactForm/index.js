@@ -12,7 +12,6 @@ import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService';
-import clearFormat from '../../utils/clearFormat';
 
 const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
   const [name, setName] = useState('');
@@ -52,8 +51,14 @@ const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
     setFieldsValue(contact) {
       setName(contact.name ?? '');
       setEmail(contact.email ?? '');
-      setPhone(clearFormat(contact.phone ?? ''));
-      setCategoryId(formatPhone(contact.category_id ?? ''));
+      setPhone(formatPhone(contact.phone ?? ''));
+      setCategoryId(contact.category_id ?? '');
+    },
+    resetFields() {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategoryId('');
     },
   }), []);
 
@@ -90,11 +95,6 @@ const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
     await onSubmit({
       name, email, phone, categoryId,
     });
-
-    setName('');
-    setEmail('');
-    setPhone('');
-    setCategoryId('');
 
     setSubmitting(false);
   }
