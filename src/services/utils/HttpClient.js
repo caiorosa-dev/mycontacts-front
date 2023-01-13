@@ -1,5 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3333';
+// 'http://localhost:3333'
+
+axios.defaults.baseURL = 'https://mycontacts-api.caiorosadev.com';
 
 export default axios;
