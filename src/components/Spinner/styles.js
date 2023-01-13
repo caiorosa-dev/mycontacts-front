@@ -20,16 +20,25 @@ const sizes = {
   },
 };
 
+const colors = {
+  white: '#fff',
+  default: '#5061FC',
+};
+
 const defaultStyles = css`
   display: block;
   position: absolute;
   margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 `;
 
 const ballStyles = css`
   width: ${({ size }) => `${(sizes[size]?.ballSize || defaultBallSize)}px`};
   height: ${({ size }) => `${(sizes[size]?.ballSize || defaultBallSize)}px`};
-  background: #5061FC;
+  background: ${({ color }) => colors[color] || colors.default};
   border-radius: 50%;
 `;
 
@@ -90,19 +99,12 @@ export const StyledSpinner = styled.div`
   span {
     ${defaultStyles}
     ${spinnerStyles}
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
   }
 
   ::before {
     content: "";
     ${defaultStyles}
     ${ballStyles}
-    top: 0;
-    left: 0;
-    bottom: 0;
     right: auto;
     -webkit-animation: ${(props) => animation(props, 1)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
     animation: ${(props) => animation(props, 1)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
@@ -112,10 +114,7 @@ export const StyledSpinner = styled.div`
     content: "";
     ${defaultStyles}
     ${ballStyles}
-    top: 0;
     left: auto;
-    bottom: 0;
-    right: 0;
     -webkit-animation: ${(props) => animation(props, 2)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
     animation: ${(props) => animation(props, 2)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
   }
@@ -124,10 +123,7 @@ export const StyledSpinner = styled.div`
     content: "";
     ${defaultStyles}
     ${ballStyles}
-    top: 0;
-    left: 0;
     bottom: auto;
-    right: 0;
     -webkit-animation: ${(props) => animation(props, 3)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
     animation: ${(props) => animation(props, 3)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
   }
@@ -137,9 +133,6 @@ export const StyledSpinner = styled.div`
     ${defaultStyles}
     ${ballStyles}
     top: auto;
-    left: 0;
-    bottom: 0;
-    right: 0;
     -webkit-animation: ${(props) => animation(props, 4)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
     animation: ${(props) => animation(props, 4)} ${animationTime} cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
   }

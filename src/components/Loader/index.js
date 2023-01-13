@@ -1,15 +1,14 @@
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Overlay } from './styles';
-
-import './loader.css';
+import Spinner from '../Spinner';
 
 export default function Loader({ isLoading }) {
   if (!isLoading) return null;
 
   return createPortal(
     <Overlay>
-      <div className="loader-5"><span /></div>
+      <Spinner size="large" />
     </Overlay>,
     // eslint-disable-next-line comma-dangle
     document.getElementById('loader-root')
