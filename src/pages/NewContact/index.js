@@ -1,12 +1,9 @@
-import { useHistory } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import ContactForm from '../../components/ContactForm';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 
 export default function NewContact() {
-  const history = useHistory();
-
   async function handleSubmit({
     name, email, phone, categoryId,
   }) {
@@ -16,8 +13,6 @@ export default function NewContact() {
 
     try {
       await ContactsService.create(contact);
-
-      // history.push('/');
 
       toast({
         type: 'success',

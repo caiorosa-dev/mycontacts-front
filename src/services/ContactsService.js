@@ -10,6 +10,14 @@ class ContactsService {
     return data;
   }
 
+  async get(id) {
+    const { data } = await HttpClient.get(`/contacts/${id}`);
+
+    await delay(500);
+
+    return data;
+  }
+
   async create(contact) {
     const { data } = await HttpClient.post('/contacts', contact);
 
