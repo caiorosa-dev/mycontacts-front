@@ -34,8 +34,30 @@ export default function EditContact() {
     loadContact();
   });
 
-  async function handleSubmit() {
-    console.log('Submit');
+  async function handleSubmit({
+    name, email, phone, categoryId,
+  }) {
+    console.log(categoryId);
+
+    const contact = {
+      id, name, email, phone, category_id: categoryId,
+    };
+
+    try {
+      await ContactsService.update(contact);
+
+      setContactName(name);
+
+      toast({
+        type: 'success',
+        text: 'Contato atualizado com sucesso!',
+      });
+    } catch (error) {
+      toast({
+        type: 'danger',
+        text: 'Ocorreu um erro ao atualizar o cadastro!',
+      });
+    }
   }
 
   return (
@@ -44,7 +66,7 @@ export default function EditContact() {
 
       <PageHeader title={isLoading ? 'Carregando...' : `Editar ${contactName}`} />
 
-      <ContactForm buttonText="Cadastrar" onSubmit={handleSubmit} ref={contactFormRef} />
+      <ContactForm buttonText="Salvar Alterações" onSubmit={handleSubmit} ref={contactFormRef} />
     </>
   );
 }
