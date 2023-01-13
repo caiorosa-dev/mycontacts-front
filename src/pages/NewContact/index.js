@@ -35,7 +35,7 @@ export default function NewContact() {
     <>
       <PageHeader title="Novo Contato" />
 
-      <ContactForm buttonText="Cadastrar" onSubmit={handleSubmit} ref={contactFormRef} />
+      <ContactForm buttonLabel="Cadastrar" onSubmit={handleSubmit} ref={contactFormRef} />
     </>
   );
 }

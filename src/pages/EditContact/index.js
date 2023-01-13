@@ -66,7 +66,7 @@ export default function EditContact() {
 
       <PageHeader title={isLoading ? 'Carregando...' : `Editar ${contactName}`} />
 
-      <ContactForm buttonText="Salvar Alterações" onSubmit={handleSubmit} ref={contactFormRef} />
+      <ContactForm buttonLabel="Salvar Alterações" onSubmit={handleSubmit} ref={contactFormRef} />
     </>
   );
 }

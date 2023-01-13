@@ -13,7 +13,7 @@ import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService';
 
-const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
+const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -124,14 +124,14 @@ const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
       </FormGroup>
 
       <Button type="submit" disabled={!isFormValid} isLoading={isSubmitting}>
-        { buttonText }
+        { buttonLabel }
       </Button>
     </Form>
   );
 });
 
 ContactForm.propTypes = {
-  buttonText: PropTypes.string.isRequired,
+  buttonLabel: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
