@@ -12,6 +12,7 @@ import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService';
+import clearFormat from '../../utils/clearFormat';
 
 const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
   const [name, setName] = useState('');
@@ -49,10 +50,10 @@ const ContactForm = forwardRef(({ buttonText, onSubmit }, ref) => {
 
   useImperativeHandle(ref, () => ({
     setFieldsValue(contact) {
-      setName(contact.name);
-      setEmail(contact.email);
-      setPhone(contact.phone);
-      setCategoryId(contact.category_id);
+      setName(contact.name ?? '');
+      setEmail(contact.email ?? '');
+      setPhone(clearFormat(contact.phone ?? ''));
+      setCategoryId(formatPhone(contact.category_id ?? ''));
     },
   }), []);
 
