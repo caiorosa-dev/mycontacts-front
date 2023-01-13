@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import ContactForm from '../../components/ContactForm';
 import Loader from '../../components/Loader';
 import PageHeader from '../../components/PageHeader';
+import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 
@@ -13,21 +14,25 @@ export default function EditContact() {
 
   const { id } = useParams();
   const history = useHistory();
+  const safeAsyncAction = useSafeAsyncAction();
 
   useEffect(() => {
     async function loadContact() {
       try {
         const contactData = await ContactsService.get(id);
 
-        setContactName(contactData.name);
+        safeAsyncAction(() => {
+          setContactName(contactData.name);
 
-        contactFormRef.current.setFieldsValue(contactData);
-
-        setLoading(false);
+          contactFormRef.current.setFieldsValue(contactData);
+          setLoading(false);
+        });
       } catch (error) {
-        toast({ type: 'danger', text: 'Contato não encontrado.' });
+        safeAsyncAction(() => {
+          toast({ type: 'danger', text: 'Contato não encontrado.' });
 
-        history.push('/');
+          history.push('/');
+        });
       }
     }
 
