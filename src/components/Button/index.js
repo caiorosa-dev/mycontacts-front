@@ -1,7 +1,7 @@
 import {
   bool, func, node, string,
 } from 'prop-types';
-import SmallSpinner from '../SmallSpinner';
+import Spinner from '../Spinner';
 import { StyledButton } from './styles';
 
 export default function Button({
@@ -10,7 +10,7 @@ export default function Button({
   return (
     <StyledButton type={type} disabled={disabled || isLoading} danger={danger} onClick={onClick}>
       { !isLoading && children }
-      { isLoading && <SmallSpinner /> }
+      { isLoading && <Spinner /> }
     </StyledButton>
   );
 }
