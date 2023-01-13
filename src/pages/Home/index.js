@@ -9,6 +9,7 @@ import ContactListContent from '../../components/ContactList/Content';
 import WithError from '../../components/ContactList/WithError';
 import EmptyContacts from '../../components/ContactList/EmptyContacts';
 import EmptySearch from '../../components/ContactList/EmptySearch';
+import Modal from '../../components/Modal';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -57,6 +58,10 @@ export default function Home() {
   return (
     <section>
       <Loader isLoading={isLoading} />
+
+      <Modal danger title='Tem certeza que deseja remover o contato "Matheus Silva"?' confirmLabel="Deletar">
+        <p>Está ação não pode ser desfeita!</p>
+      </Modal>
 
       <SearchInputContainer>
         <input type="text" placeholder="Digite um nome..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />

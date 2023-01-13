@@ -25,13 +25,13 @@ export const Container = styled.div`
   background: #fff;
   box-shadow: ${({ theme }) => theme.shadow};
 
-  h1 {
+  > h1 {
     font-size: 22px;
     color: ${({ theme, danger }) => danger && theme.colors.danger.main};
   }
 
-  p {
-    margin-top: 8px;
+  .modal-body {
+    margin-top: 32px;
   }
 `;
 
@@ -43,7 +43,7 @@ export const Footer = styled.div`
 
   .cancel-button {
     background: none;
-    margin-right: 8px;
+    margin-right: 24px;
     font-size: 16px;
     color: ${({ theme }) => theme.colors.gray.main};
   }
