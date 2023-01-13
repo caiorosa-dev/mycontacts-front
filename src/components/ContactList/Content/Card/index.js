@@ -9,10 +9,14 @@ import Delete from '../../../../assets/images/icons/delete.svg';
 
 import formatPhone from '../../../../utils/formatPhone';
 
-export default function Card({ contact }) {
+export default function Card({ contact, onDeleteClick }) {
   const {
     id, name, email, phone, category_name,
   } = contact;
+
+  function handleDeleteClick() {
+    onDeleteClick(contact);
+  }
 
   return (
     <Container>
@@ -27,7 +31,7 @@ export default function Card({ contact }) {
       </InnerContainer>
       <ButtonsContainer>
         <Link to={`/edit/${id}`}><img src={Edit} alt="Edit" /></Link>
-        <button type="button"><img src={Delete} alt="Delete" /></button>
+        <button type="button" onClick={handleDeleteClick}><img src={Delete} alt="Delete" /></button>
       </ButtonsContainer>
     </Container>
   );
@@ -41,4 +45,5 @@ Card.propTypes = {
     phone: PropTypes.string,
     category_name: PropTypes.string,
   }).isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };

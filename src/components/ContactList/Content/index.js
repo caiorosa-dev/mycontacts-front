@@ -5,7 +5,7 @@ import Card from './Card';
 import { CardContainer, Button, ArrowImage } from './styles';
 import Arrow from '../../../assets/images/icons/arrow.svg';
 
-export default function ContactListContent({ contacts, onOrderToggle }) {
+export default function ContactListContent({ contacts, onOrderToggle, onDeleteClick }) {
   const [arrowAngle, setArrowAngle] = useState(0);
 
   function handleOrderToggle() {
@@ -22,7 +22,10 @@ export default function ContactListContent({ contacts, onOrderToggle }) {
       </Button>
 
       <CardContainer>
-        { contacts.map((contact) => <Card key={contact.id} contact={contact} />) }
+        { contacts
+          .map(
+            (contact) => <Card key={contact.id} contact={contact} onDeleteClick={onDeleteClick} />,
+          )}
       </CardContainer>
     </div>
   );
@@ -37,4 +40,5 @@ ContactListContent.propTypes = {
     category_name: PropTypes.string,
   })).isRequired,
   onOrderToggle: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };

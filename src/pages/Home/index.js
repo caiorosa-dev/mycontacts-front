@@ -10,6 +10,7 @@ import WithError from '../../components/ContactList/WithError';
 import EmptyContacts from '../../components/ContactList/EmptyContacts';
 import EmptySearch from '../../components/ContactList/EmptySearch';
 import Modal from '../../components/Modal';
+import toast from '../../utils/toast';
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
@@ -17,6 +18,10 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [contactBeingDelete, setContactBeingDelete] = useState({});
+  const [isLoadingDelete, setLoadingDelete] = useState(false);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -51,7 +56,34 @@ export default function Home() {
     loadContacts();
   }
 
-  function onOrderToggle() {
+  function handleDeleteContact(contact) {
+    setContactBeingDelete(contact);
+    setDeleteModalVisible(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setDeleteModalVisible(false);
+    setContactBeingDelete({});
+  }
+
+  async function handleConfirmDeleteModal() {
+    setLoadingDelete(true);
+
+    try {
+      await ContactsService.delete(contactBeingDelete.id);
+
+      setContacts((prevState) => prevState.filter((obj) => obj.id !== contactBeingDelete.id));
+
+      handleCloseDeleteModal();
+      toast({ type: 'success', text: 'O contato deletado com sucesso!' });
+    } catch (err) {
+      toast({ type: 'danger', text: 'Ocorreu um erro ao deletar o contato!' });
+    } finally {
+      setLoadingDelete(false);
+    }
+  }
+
+  function handleOrderToggle() {
     setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
   }
 
@@ -59,7 +91,15 @@ export default function Home() {
     <section>
       <Loader isLoading={isLoading} />
 
-      <Modal danger title='Tem certeza que deseja remover o contato "Matheus Silva"?' confirmLabel="Deletar">
+      <Modal
+        danger
+        title={`Tem certeza que deseja remover o contato '${contactBeingDelete?.name}'?`}
+        confirmLabel="Deletar"
+        visible={isDeleteModalVisible}
+        onCancel={handleCloseDeleteModal}
+        onConfirm={handleConfirmDeleteModal}
+        isLoading={isLoadingDelete}
+      >
         <p>Está ação não pode ser desfeita!</p>
       </Modal>
 
@@ -74,7 +114,11 @@ export default function Home() {
 
           <Division />
 
-          <ContactListContent contacts={filteredContacts} onOrderToggle={onOrderToggle} />
+          <ContactListContent
+            contacts={filteredContacts}
+            onOrderToggle={handleOrderToggle}
+            onDeleteClick={handleDeleteContact}
+          />
         </>
         ) }
         { hasError && <WithError handleTryLoadContacts={handleTryLoadContacts} /> }
