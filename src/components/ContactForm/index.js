@@ -12,6 +12,7 @@ import isEmailValid from '../../utils/isEmailValid';
 import formatPhone from '../../utils/formatPhone';
 import useErrors from '../../hooks/useErrors';
 import CategoriesService from '../../services/CategoriesService';
+import useSafeAsyncState from '../../hooks/useSafeAsyncState';
 
 const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [name, setName] = useState('');
@@ -19,8 +20,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [phone, setPhone] = useState('');
   const [categoryId, setCategoryId] = useState('');
 
-  const [categories, setCategories] = useState([]);
-  const [isLoadingCategories, setLoadingCategories] = useState(true);
+  const [categories, setCategories] = useSafeAsyncState([]);
+  const [isLoadingCategories, setLoadingCategories] = useSafeAsyncState(true);
   const [isSubmitting, setSubmitting] = useState(false);
 
   const {
@@ -28,6 +29,21 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   } = useErrors();
 
   const isFormValid = (isValidToSubmit() && name);
+
+  useImperativeHandle(ref, () => ({
+    setFieldsValue(contact) {
+      setName(contact.name ?? '');
+      setEmail(contact.email ?? '');
+      setPhone(formatPhone(contact.phone ?? ''));
+      setCategoryId(contact.category_id ?? '');
+    },
+    resetFields() {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCategoryId('');
+    },
+  }), []);
 
   useEffect(() => {
     async function loadCategories() {
@@ -45,22 +61,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     }
 
     loadCategories();
-  }, []);
-
-  useImperativeHandle(ref, () => ({
-    setFieldsValue(contact) {
-      setName(contact.name ?? '');
-      setEmail(contact.email ?? '');
-      setPhone(formatPhone(contact.phone ?? ''));
-      setCategoryId(contact.category_id ?? '');
-    },
-    resetFields() {
-      setName('');
-      setEmail('');
-      setPhone('');
-      setCategoryId('');
-    },
-  }), []);
+  }, [setCategories, setLoadingCategories]);
 
   function handleNameChange(value) {
     setName(value);
