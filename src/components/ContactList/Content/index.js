@@ -37,7 +37,7 @@ ContactListContent.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string,
     phone: PropTypes.string,
-    category_name: PropTypes.string,
+    categoryName: PropTypes.string,
   })).isRequired,
   onOrderToggle: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,

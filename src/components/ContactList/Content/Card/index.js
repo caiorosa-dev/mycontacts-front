@@ -11,7 +11,7 @@ import formatPhone from '../../../../utils/formatPhone';
 
 export default function Card({ contact, onDeleteClick }) {
   const {
-    id, name, email, phone, category_name,
+    id, name, email, phone, categoryName,
   } = contact;
 
   function handleDeleteClick() {
@@ -23,7 +23,7 @@ export default function Card({ contact, onDeleteClick }) {
       <InnerContainer>
         <Header>
           <Name>{ name }</Name>
-          { category_name && <Tag>{ category_name }</Tag> }
+          { categoryName && <Tag>{ categoryName }</Tag> }
         </Header>
 
         { email && <Information>{ email }</Information> }
@@ -43,7 +43,7 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
     email: PropTypes.string,
     phone: PropTypes.string,
-    category_name: PropTypes.string,
+    categoryName: PropTypes.string,
   }).isRequired,
   onDeleteClick: PropTypes.func.isRequired,
 };
