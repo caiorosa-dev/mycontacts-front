@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// 'http://localhost:3333'
+// 'https://mycontacts-api.caiorosadev.com'
 
-axios.defaults.baseURL = 'https://mycontacts-api.caiorosadev.com';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:3333';
 
 export default axios;
