@@ -39,19 +39,11 @@ export default function EditContact() {
     loadContact();
   });
 
-  async function handleSubmit({
-    name, email, phone, categoryId,
-  }) {
-    console.log(categoryId);
-
-    const contact = {
-      id, name, email, phone, category_id: categoryId,
-    };
-
+  async function handleSubmit(contact) {
     try {
-      await ContactsService.update(contact);
+      await ContactsService.update(id, contact);
 
-      setContactName(name);
+      setContactName(contact.name);
 
       toast({
         type: 'success',

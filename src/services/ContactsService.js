@@ -1,26 +1,27 @@
+import ContactMapper from './mappers/ContactMapper';
 import HttpClient from './utils/HttpClient';
 
 class ContactsService {
   async list(orderBy = 'asc') {
     const { data } = await HttpClient.get(`/contacts?orderBy=${orderBy}`);
 
-    return data;
+    return data.map(ContactMapper.toDomain);
   }
 
   async get(id) {
     const { data } = await HttpClient.get(`/contacts/${id}`);
 
-    return data;
+    return ContactMapper.toDomain(data);
   }
 
   async create(contact) {
-    const { data } = await HttpClient.post('/contacts', contact);
+    const { data } = await HttpClient.post('/contacts', ContactMapper.toPersistence(contact));
 
-    return data;
+    return ContactMapper.toDomain(data);
   }
 
-  async update(contact) {
-    const { data } = await HttpClient.put(`/contacts/${contact.id}`, contact);
+  async update(id, contact) {
+    const { data } = await HttpClient.put(`/contacts/${id}`, ContactMapper.toPersistence(contact));
 
     return data;
   }
