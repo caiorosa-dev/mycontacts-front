@@ -1,11 +1,18 @@
 import {
   useCallback, useEffect, useMemo, useState,
 } from 'react';
+import useAnimatedList from '../../hooks/useAnimatedList';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
 
 export default function useHome() {
-  const [contacts, setContacts] = useState([]);
+  const {
+    items: contacts,
+    setItems: setContacts,
+    renderList,
+    handleRemoveItem,
+  } = useAnimatedList();
+
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setLoading] = useState(true);
@@ -38,7 +45,7 @@ export default function useHome() {
     } finally {
       setLoading(false);
     }
-  }, [orderBy]);
+  }, [orderBy, setContacts]);
 
   useEffect(() => {
     loadContacts();
@@ -63,8 +70,7 @@ export default function useHome() {
     try {
       await ContactsService.delete(contactBeingDelete.id);
 
-      setContacts((prevState) => prevState.filter((obj) => obj.id !== contactBeingDelete.id));
-
+      handleRemoveItem(contactBeingDelete.id);
       handleCloseDeleteModal();
       toast({ type: 'success', text: 'O contato deletado com sucesso!' });
     } catch (err) {
@@ -93,5 +99,6 @@ export default function useHome() {
     handleOrderToggle,
     handleDeleteContact,
     handleTryLoadContacts,
+    renderList,
   };
 }

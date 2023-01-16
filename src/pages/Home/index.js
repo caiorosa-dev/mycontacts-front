@@ -25,6 +25,7 @@ export default function Home() {
     handleOrderToggle,
     handleDeleteContact,
     handleTryLoadContacts,
+    renderList,
   } = useHome();
 
   const hasContacts = contacts.length > 0;
@@ -50,6 +51,7 @@ export default function Home() {
             contacts={filteredContacts}
             onOrderToggle={handleOrderToggle}
             onDeleteClick={handleDeleteContact}
+            renderList={renderList}
           />
 
           <Modal
