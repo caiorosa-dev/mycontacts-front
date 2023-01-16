@@ -4,10 +4,10 @@ import {
   Container, Header, Information, InnerContainer, Name, Tag, ButtonsContainer,
 } from './styles';
 
-import Edit from '../../../../assets/images/icons/edit.svg';
-import Delete from '../../../../assets/images/icons/delete.svg';
+import Edit from '../../../../../../assets/images/icons/edit.svg';
+import Delete from '../../../../../../assets/images/icons/delete.svg';
 
-import formatPhone from '../../../../utils/formatPhone';
+import formatPhone from '../../../../../../utils/formatPhone';
 
 export default function Card({ contact, onDeleteClick }) {
   const {

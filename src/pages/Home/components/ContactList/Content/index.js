@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from './Card';
 import { CardContainer, Button, ArrowImage } from './styles';
-import Arrow from '../../../assets/images/icons/arrow.svg';
+import Arrow from '../../../../../assets/images/icons/arrow.svg';
 
 export default function ContactListContent({ contacts, onOrderToggle, onDeleteClick }) {
   const [arrowAngle, setArrowAngle] = useState(0);

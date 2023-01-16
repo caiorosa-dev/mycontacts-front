@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { func } from 'prop-types';
 import { ErrorContainer, Header } from './styles';
 
-import Sad from '../../../assets/images/icons/sad.svg';
-import Button from '../../Button';
-import { Division } from '../../../pages/Home/styles';
+import Sad from '../../../../assets/images/icons/sad.svg';
+import Button from '../../../../components/Button';
+import { Division } from '../../styles';
 
-export default function WithError({ handleTryLoadContacts }) {
+export default function ErrorStatus({ handleTryLoadContacts }) {
   return (
     <>
       <Header>
@@ -26,6 +26,6 @@ export default function WithError({ handleTryLoadContacts }) {
   );
 }
 
-WithError.propTypes = {
+ErrorStatus.propTypes = {
   handleTryLoadContacts: func.isRequired,
 };

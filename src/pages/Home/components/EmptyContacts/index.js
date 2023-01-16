@@ -3,8 +3,8 @@ import {
   Container, Header, Icon, Text,
 } from './styles';
 
-import EmptyBox from '../../../assets/images/icons/empty-box.svg';
-import { Division } from '../../../pages/Home/styles';
+import EmptyBox from '../../../../assets/images/icons/empty-box.svg';
+import { Division } from '../../styles';
 
 export default function EmptyContacts() {
   return (
@@ -27,7 +27,6 @@ export default function EmptyContacts() {
           <strong>”Novo contato”</strong>
           {' '}
           à cima para cadastrar o seu primeiro!
-
         </Text>
       </Container>
     </>
