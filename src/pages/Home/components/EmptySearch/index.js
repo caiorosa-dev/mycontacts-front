@@ -1,9 +1,9 @@
 import { string } from 'prop-types';
 import { SimpleContainer } from './styles';
 
-import MagnifierQuestion from '../../../assets/images/icons/magnifier-question.svg';
-import { Division } from '../../../pages/Home/styles';
-import ContactListHeader from '../Header';
+import MagnifierQuestion from '../../../../assets/images/icons/magnifier-question.svg';
+import { Division } from '../../styles';
+import ContactListHeader from '../ContactList/Header';
 
 export default function EmptySearch({ searchTerm }) {
   return (

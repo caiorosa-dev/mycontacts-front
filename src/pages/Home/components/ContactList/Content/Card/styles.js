@@ -1,4 +1,26 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const cardIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const cardOut = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+`;
 
 export const Container = styled.div`
   background: #fff;
@@ -9,6 +31,10 @@ export const Container = styled.div`
   padding: 16px;
   min-height: 96px;
   box-shadow: ${({ theme }) => theme.shadow};
+
+  animation: ${cardIn} 0.3s ease-out;
+
+  ${({ isLeaving }) => isLeaving && css`animation: ${cardOut} 0.3s ease-in;`}
 `;
 
 export const Name = styled.strong`

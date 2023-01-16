@@ -1,14 +1,14 @@
 import {
-  func, number, oneOf, shape, string,
+  bool, func, number, oneOf, shape, string,
 } from 'prop-types';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { Container } from './styles';
 
 import CheckCircle from '../../../assets/images/icons/check-circle.svg';
 import XCircle from '../../../assets/images/icons/x-circle.svg';
 
-export default function ToastMessage({
-  message, onRemoveToast,
+function ToastMessage({
+  message, onRemoveToast, isLeaving, animatedRef,
 }) {
   const {
     id, text, type, duration,
@@ -29,7 +29,7 @@ export default function ToastMessage({
   }
 
   return (
-    <Container type={type} onClick={handleRemoveToast} tabIndex={0} role="button">
+    <Container type={type} onClick={handleRemoveToast} tabIndex={0} role="button" isLeaving={isLeaving} ref={animatedRef}>
       { type === 'success' && <img src={CheckCircle} alt="Check Circle" /> }
       { type === 'danger' && <img src={XCircle} alt="Check Circle" /> }
       <strong>{ text }</strong>
@@ -45,4 +45,8 @@ ToastMessage.propTypes = {
     duration: number.isRequired,
   })).isRequired,
   onRemoveToast: func.isRequired,
+  isLeaving: bool.isRequired,
+  animatedRef: shape().isRequired,
 };
+
+export default memo(ToastMessage);

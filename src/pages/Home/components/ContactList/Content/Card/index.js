@@ -4,12 +4,14 @@ import {
   Container, Header, Information, InnerContainer, Name, Tag, ButtonsContainer,
 } from './styles';
 
-import Edit from '../../../../assets/images/icons/edit.svg';
-import Delete from '../../../../assets/images/icons/delete.svg';
+import Edit from '../../../../../../assets/images/icons/edit.svg';
+import Delete from '../../../../../../assets/images/icons/delete.svg';
 
-import formatPhone from '../../../../utils/formatPhone';
+import formatPhone from '../../../../../../utils/formatPhone';
 
-export default function Card({ contact, onDeleteClick }) {
+export default function Card({
+  contact, onDeleteClick, isLeaving, animatedRef,
+}) {
   const {
     id, name, email, phone, categoryName,
   } = contact;
@@ -19,7 +21,7 @@ export default function Card({ contact, onDeleteClick }) {
   }
 
   return (
-    <Container>
+    <Container ref={animatedRef} isLeaving={isLeaving}>
       <InnerContainer>
         <Header>
           <Name>{ name }</Name>
@@ -46,4 +48,6 @@ Card.propTypes = {
     categoryName: PropTypes.string,
   }).isRequired,
   onDeleteClick: PropTypes.func.isRequired,
+  isLeaving: PropTypes.bool.isRequired,
+  animatedRef: PropTypes.shape().isRequired,
 };

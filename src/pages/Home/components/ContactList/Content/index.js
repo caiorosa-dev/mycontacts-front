@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Card from './Card';
 import { CardContainer, Button, ArrowImage } from './styles';
-import Arrow from '../../../assets/images/icons/arrow.svg';
+import Arrow from '../../../../../assets/images/icons/arrow.svg';
 
-export default function ContactListContent({ contacts, onOrderToggle, onDeleteClick }) {
+export default function ContactListContent({
+  contacts, onOrderToggle, onDeleteClick, renderList,
+}) {
   const [arrowAngle, setArrowAngle] = useState(0);
 
   function handleOrderToggle() {
@@ -22,10 +24,15 @@ export default function ContactListContent({ contacts, onOrderToggle, onDeleteCl
       </Button>
 
       <CardContainer>
-        { contacts
-          .map(
-            (contact) => <Card key={contact.id} contact={contact} onDeleteClick={onDeleteClick} />,
-          )}
+        { renderList((contact, { isLeaving, animatedRef }) => (
+          <Card
+            key={contact.id}
+            contact={contact}
+            onDeleteClick={onDeleteClick}
+            animatedRef={animatedRef}
+            isLeaving={isLeaving}
+          />
+        ), contacts)}
       </CardContainer>
     </div>
   );
@@ -41,4 +48,5 @@ ContactListContent.propTypes = {
   })).isRequired,
   onOrderToggle: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
+  renderList: PropTypes.func.isRequired,
 };
