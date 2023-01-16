@@ -9,7 +9,7 @@ export default function ContactListHeader({ amount }) {
       <strong>
         {amount}
         {' '}
-        {amount > 1 ? 'contatos' : 'contato' }
+        {amount !== 1 ? 'contatos' : 'contato' }
       </strong>
 
       <Link to="/new">Novo Contato</Link>

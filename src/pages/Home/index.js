@@ -29,24 +29,13 @@ export default function Home() {
 
   const hasContacts = contacts.length > 0;
   const hasFilteredContacts = filteredContacts.length > 0;
-  const isListEmpty = !hasError && !isLoading && !hasContacts;
-  const isSearchResultsEmpty = !hasError && !isLoading && !hasFilteredContacts && hasContacts;
+
+  const isListEmpty = !hasError && (!isLoading && !hasContacts);
+  const isSearchResultsEmpty = !hasError && (!isLoading && !hasFilteredContacts && hasContacts);
 
   return (
     <section>
       <Loader isLoading={isLoading} />
-
-      <Modal
-        danger
-        title={`Tem certeza que deseja remover o contato '${contactBeingDelete?.name}'?`}
-        confirmLabel="Deletar"
-        visible={isDeleteModalVisible}
-        onCancel={handleCloseDeleteModal}
-        onConfirm={handleConfirmDeleteModal}
-        isLoading={isLoadingDelete}
-      >
-        <p>Está ação não pode ser desfeita!</p>
-      </Modal>
 
       <SearchInput onSearchTermChange={setSearchTerm} value={searchTerm} />
 
@@ -62,6 +51,18 @@ export default function Home() {
             onOrderToggle={handleOrderToggle}
             onDeleteClick={handleDeleteContact}
           />
+
+          <Modal
+            danger
+            title={`Tem certeza que deseja remover o contato '${contactBeingDelete?.name}'?`}
+            confirmLabel="Deletar"
+            visible={isDeleteModalVisible}
+            onCancel={handleCloseDeleteModal}
+            onConfirm={handleConfirmDeleteModal}
+            isLoading={isLoadingDelete}
+          >
+            <p>Está ação não pode ser desfeita!</p>
+          </Modal>
         </>
         ) }
 
