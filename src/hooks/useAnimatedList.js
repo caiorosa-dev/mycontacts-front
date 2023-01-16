@@ -43,12 +43,16 @@ export default function useAnimatedList(initialValue = []) {
     setPendingRemovalItemsIds((prevState) => prevState.filter((id) => id !== itemId));
   }, []);
 
-  const renderList = useCallback((renderItem) => items.map((item) => {
-    const isLeaving = pendingRemovalItemsIds.includes(item.id);
-    const animatedRef = getAnimatedRef(item.id);
+  const renderList = useCallback((renderItem, listToRender) => {
+    const itemsList = listToRender || items;
 
-    return renderItem(item, { isLeaving, animatedRef });
-  }), [getAnimatedRef, items, pendingRemovalItemsIds]);
+    return itemsList.map((item) => {
+      const isLeaving = pendingRemovalItemsIds.includes(item.id);
+      const animatedRef = getAnimatedRef(item.id);
+
+      return renderItem(item, { isLeaving, animatedRef });
+    });
+  }, [getAnimatedRef, items, pendingRemovalItemsIds]);
 
   /**
    * Hooks
