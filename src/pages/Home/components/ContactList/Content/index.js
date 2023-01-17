@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import Card from './Card';
 import { CardContainer, Button, ArrowImage } from './styles';
 import Arrow from '../../../../../assets/images/icons/arrow.svg';
 
-export default function ContactListContent({
+function ContactListContent({
   contacts, onOrderToggle, onDeleteClick, renderList,
 }) {
   const [arrowAngle, setArrowAngle] = useState(0);
@@ -50,3 +50,5 @@ ContactListContent.propTypes = {
   onDeleteClick: PropTypes.func.isRequired,
   renderList: PropTypes.func.isRequired,
 };
+
+export default memo(ContactListContent);

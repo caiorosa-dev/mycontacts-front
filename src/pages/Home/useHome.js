@@ -1,5 +1,5 @@
 import {
-  useCallback, useEffect, useMemo, useState,
+  useCallback, useDeferredValue, useEffect, useMemo, useState,
 } from 'react';
 import useAnimatedList from '../../hooks/useAnimatedList';
 import ContactsService from '../../services/ContactsService';
@@ -22,9 +22,11 @@ export default function useHome() {
   const [contactBeingDelete, setContactBeingDelete] = useState({});
   const [isLoadingDelete, setLoadingDelete] = useState(false);
 
+  const deferredSearchTerm = useDeferredValue(searchTerm);
+
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )), [contacts, searchTerm]);
+    contact.name.toLowerCase().includes(deferredSearchTerm.toLowerCase())
+  )), [contacts, deferredSearchTerm]);
 
   const loadContacts = useCallback(async () => {
     setLoading(true);
@@ -55,10 +57,14 @@ export default function useHome() {
     loadContacts();
   }
 
-  function handleDeleteContact(contact) {
+  const handleOrderToggle = useCallback(() => {
+    setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
+  }, []);
+
+  const handleDeleteContact = useCallback((contact) => {
     setContactBeingDelete(contact);
     setDeleteModalVisible(true);
-  }
+  }, []);
 
   function handleCloseDeleteModal() {
     setDeleteModalVisible(false);
@@ -78,10 +84,6 @@ export default function useHome() {
     } finally {
       setLoadingDelete(false);
     }
-  }
-
-  function handleOrderToggle() {
-    setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
   }
 
   return {
