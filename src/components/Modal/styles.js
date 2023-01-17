@@ -36,7 +36,7 @@ export const Overlay = styled.div`
 
   animation: ${fadeIn} 0.3s ease-in;
 
-  ${({ isLeaving }) => isLeaving && css`animation: ${fadeOut} 0.3s ease-out;`}
+  ${({ isLeaving }) => isLeaving && css`animation: ${fadeOut} 0.3s ease-out forwards;`}
 `;
 
 export const Container = styled.div`
@@ -50,7 +50,7 @@ export const Container = styled.div`
   box-shadow: ${({ theme }) => theme.shadow};
 
   animation: ${scaleIn} 0.3s ease-in;
-  ${({ isLeaving }) => isLeaving && css`animation: ${scaleOut} 0.3s ease-out;`}
+  ${({ isLeaving }) => isLeaving && css`animation: ${scaleOut} 0.3s ease-out forwards;`}
 
   > h1 {
     font-size: 22px;

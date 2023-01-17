@@ -25,5 +25,5 @@ export const Overlay = styled.div`
 
   animation: ${fadeIn} 0.3s ease-in;
 
-${({ isLeaving }) => isLeaving && css`animation: ${fadeOut} 0.3s ease-out;`}
+${({ isLeaving }) => isLeaving && css`animation: ${fadeOut} 0.3s ease-out forwards;`}
 `;

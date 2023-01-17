@@ -34,7 +34,7 @@ export const Container = styled.div`
 
   animation: ${cardIn} 0.3s ease-out;
 
-  ${({ isLeaving }) => isLeaving && css`animation: ${cardOut} 0.3s ease-in;`}
+  ${({ isLeaving }) => isLeaving && css`animation: ${cardOut} 0.3s ease-in forwards;`}
 `;
 
 export const Name = styled.strong`
