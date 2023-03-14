@@ -2,14 +2,14 @@ import ContactMapper from './mappers/ContactMapper';
 import HttpClient from './utils/HttpClient';
 
 class ContactsService {
-  async list(orderBy = 'asc') {
-    const { data } = await HttpClient.get(`/contacts?orderBy=${orderBy}`);
+  async list(signal, orderBy = 'asc') {
+    const { data } = await HttpClient.get(`/contacts?orderBy=${orderBy}`, { signal });
 
     return data.map(ContactMapper.toDomain);
   }
 
-  async get(id) {
-    const { data } = await HttpClient.get(`/contacts/${id}`);
+  async get(id, signal) {
+    const { data } = await HttpClient.get(`/contacts/${id}`, { signal });
 
     return ContactMapper.toDomain(data);
   }

@@ -14,9 +14,11 @@ export default function useEditContact() {
   const safeAsyncAction = useSafeAsyncAction();
 
   useEffect(() => {
-    async function loadContact() {
+    const controller = new AbortController();
+
+    async function loadContact(signal) {
       try {
-        const contactData = await ContactsService.get(id);
+        const contactData = await ContactsService.get(id, signal);
 
         safeAsyncAction(() => {
           setContactName(contactData.name);
@@ -33,7 +35,11 @@ export default function useEditContact() {
       }
     }
 
-    loadContact();
+    loadContact(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
   });
 
   async function handleSubmit(contact) {

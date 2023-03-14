@@ -1,3 +1,4 @@
+import { CanceledError } from 'axios';
 import {
   useCallback, useDeferredValue, useEffect, useMemo, useState,
 } from 'react';
@@ -28,11 +29,11 @@ export default function useHome() {
     contact.name.toLowerCase().includes(deferredSearchTerm.toLowerCase())
   )), [contacts, deferredSearchTerm]);
 
-  const loadContacts = useCallback(async () => {
+  const loadContacts = useCallback(async (signal) => {
     setLoading(true);
 
     try {
-      const data = await ContactsService.list(orderBy);
+      const data = await ContactsService.list(signal, orderBy);
 
       if (!data) {
         setHasError(true);
@@ -42,6 +43,7 @@ export default function useHome() {
       setHasError(false);
       setContacts(data);
     } catch (err) {
+      if (err instanceof CanceledError) return;
       setHasError(true);
       console.error(err);
     } finally {
@@ -50,7 +52,13 @@ export default function useHome() {
   }, [orderBy, setContacts]);
 
   useEffect(() => {
-    loadContacts();
+    const controller = new AbortController();
+
+    loadContacts(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
   }, [loadContacts]);
 
   function handleTryLoadContacts() {
